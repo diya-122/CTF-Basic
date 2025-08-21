@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTF Puzzle - Magenta Flag</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      color: magenta;
+      text-shadow: 0 0 10px magenta;
+    }
+    .card {
+      background: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px auto;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    }
+    .scrambled {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff66ff;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #444;
+      width: 70%;
+      margin-top: 10px;
+      text-align: center;
+      transition: 0.2s;
+    }
+    input.correct {
+      border-color: limegreen;
+      background: #003300;
+      color: #00ff00;
+    }
+    input.wrong {
+      border-color: red;
+      background: #330000;
+      color: #ff4444;
+    }
+    #colorBox, #rgbBox, #flagMessage {
+      display: none;
+      margin-top: 20px;
+    }
+    #flagMessage {
+      font-size: 26px;
+      font-weight: bold;
+      color: magenta;
+      text-shadow: 0 0 15px magenta;
+    }
+  </style>
+</head>
+<body>
+  <h1>CTF Jumbled Words</h1>
+  <p>Unscramble all riddles to unlock the flag step by step!</p>
+
+  <div class="card">
+    1. An input device you move to point and click.<br>
+    <div class="scrambled">EUSOM</div>
+    <input type="text" id="word1" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    2. Converts one interface to another, enabling connections.<br>
+    <div class="scrambled">TAPARED</div>
+    <input type="text" id="word2" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    3. A unit of digital storage (~1 billion bytes).<br>
+    <div class="scrambled">T Y B G I E G A</div>
+    <input type="text" id="word3" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    4. Encoding data so only authorized parties can read it.<br>
+    <div class="scrambled">RNYCETPION</div>
+    <input type="text" id="word4" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    5. A collection of devices connected to communicate.<br>
+    <div class="scrambled">WREKTON</div>
+    <input type="text" id="word5" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    6. A portable touchscreen device larger than a phone.<br>
+    <div class="scrambled">L E A T B T</div>
+    <input type="text" id="word6" placeholder="Your Answer">
+  </div>
+
+  <div class="card">
+    7. The collection of files/folders stored on your computer.<br>
+    <div class="scrambled">R H C I V A</div>
+    <input type="text" id="word7" placeholder="Your Answer">
+  </div>
+
+  <!-- Step 2: Color input -->
+  <div id="colorBox">
+    <div class="card">
+      Enter the secret color here:<br>
+      <input type="text" id="colorInput" placeholder="Enter color">
+    </div>
+  </div>
+
+  <!-- Step 3: RGB input -->
+  <div id="rgbBox">
+    <div class="card">
+      Enter the RGB code here:<br>
+      <input type="text" id="rgbInput" placeholder="Enter RGB e.g. 123,234,63">
+    </div>
+  </div>
+
+  <!-- Final Flag -->
+  <div id="flagMessage">🎉 Congratulations! This is your flag 🎉</div>
+
+  <script>
+    const answers = {
+      word1: "mouse",
+      word2: "adapter",
+      word3: "gigabyte",
+      word4: "encryption",
+      word5: "network",
+      word6: "tablet",
+      word7: "archive"
+    };
+
+    function checkAllSolved() {
+      return Object.keys(answers).every(id => {
+        const input = document.getElementById(id);
+        return input.classList.contains("correct");
+      });
+    }
+
+    // Check riddles instantly
+    Object.keys(answers).forEach(id => {
+      const input = document.getElementById(id);
+      input.addEventListener("input", () => {
+        if (input.value.toLowerCase() === answers[id]) {
+          input.classList.add("correct");
+          input.classList.remove("wrong");
+        } else {
+          input.classList.add("wrong");
+          input.classList.remove("correct");
+        }
+        if (checkAllSolved()) {
+          document.getElementById("colorBox").style.display = "block";
+        }
+      });
+    });
+
+    // Step 2: Check color
+    document.getElementById("colorInput").addEventListener("input", (e) => {
+      const val = e.target.value.toLowerCase().trim();
+      if (val === "magenta") {
+        e.target.classList.add("correct");
+        e.target.classList.remove("wrong");
+        document.getElementById("rgbBox").style.display = "block";
+      } else {
+        e.target.classList.add("wrong");
+        e.target.classList.remove("correct");
+      }
+    });
+
+    // Step 3: Check RGB
+    document.getElementById("rgbInput").addEventListener("input", (e) => {
+      const val = e.target.value.trim();
+      if (val === "255,0,255") {
+        e.target.classList.add("correct");
+        e.target.classList.remove("wrong");
+        document.getElementById("flagMessage").style.display = "block";
+      } else {
+        e.target.classList.add("wrong");
+        e.target.classList.remove("correct");
+        document.getElementById("flagMessage").style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
