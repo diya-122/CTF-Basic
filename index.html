@@ -62,7 +62,7 @@
       text-shadow: 0 0 15px magenta;
     }
   </style>
-</head>
+</head>   <!--<flag{unthinkable}>-->
 <body>
   <h1>CTF Jumbled Words</h1>
   <p>Unscramble all riddles to unlock the flag step by step!</p>
@@ -109,7 +109,7 @@
     <input type="text" id="word7" placeholder="Your Answer">
   </div>
 
-  <!-- Step 2: Color input -->
+  
   <div id="colorBox">
     <div class="card">
       Enter the secret color here:<br>
@@ -117,7 +117,7 @@
     </div>
   </div>
 
-  <!-- Step 3: RGB input -->
+ 
   <div id="rgbBox">
     <div class="card">
       Enter the RGB code here:<br>
@@ -125,7 +125,7 @@
     </div>
   </div>
 
-  <!-- Final Flag -->
+
   <div id="flagMessage">🎉 Congratulations! This is your flag 🎉</div>
 
   <script>
@@ -146,7 +146,7 @@
       });
     }
 
-    // Check riddles instantly
+   
     Object.keys(answers).forEach(id => {
       const input = document.getElementById(id);
       input.addEventListener("input", () => {
@@ -163,7 +163,7 @@
       });
     });
 
-    // Step 2: Check color
+
     document.getElementById("colorInput").addEventListener("input", (e) => {
       const val = e.target.value.toLowerCase().trim();
       if (val === "magenta") {
@@ -176,7 +176,6 @@
       }
     });
 
-    // Step 3: Check RGB
     document.getElementById("rgbInput").addEventListener("input", (e) => {
       const val = e.target.value.trim();
       if (val === "255,0,255") {
