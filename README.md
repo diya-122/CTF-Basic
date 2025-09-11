@@ -28,4 +28,4 @@ Hints
 Good luck, and happy hunting! 🚀
 
 Play the puzzle directly here:  
-👉 [https://finalergbb.netlify.app/]
+👉 [https://ctff.netlify.app/]
